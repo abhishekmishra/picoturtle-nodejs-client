@@ -25,5 +25,8 @@
     "argparse": "^1.0.10",
     "axios": "^0.18.0",
     "sync-request": "^6.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
