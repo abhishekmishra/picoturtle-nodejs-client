@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/abhishekmishra/picoturtle-nodejs-client/issues"
   },
-  "homepage": "https://github.com/abhishekmishra/picoturtle-nodejs-client#readme"
+  "homepage": "https://github.com/abhishekmishra/picoturtle-nodejs-client#readme",
+  "dependencies": {
+    "argparse": "^1.0.10",
+    "sync-request": "^6.0.0"
+  }
 }
