@@ -1,0 +1,24 @@
+{
+  "name": "@picoturtle/picoturtle-nodejs-client",
+  "version": "0.0.1",
+  "description": "Nodejs client for picoturtle-server",
+  "main": "picoturtle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhishekmishra/picoturtle-nodejs-client.git"
+  },
+  "keywords": [
+    "picoturtle",
+    "client",
+    "turtle"
+  ],
+  "author": "Abhishek Mishra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abhishekmishra/picoturtle-nodejs-client/issues"
+  },
+  "homepage": "https://github.com/abhishekmishra/picoturtle-nodejs-client#readme"
+}
