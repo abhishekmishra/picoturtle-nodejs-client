@@ -1,9 +1,9 @@
-const request = require('sync-request');
+const sync_request = require('sync-request');
 var ArgumentParser = require('argparse').ArgumentParser;
 
 function turtle_request_sync(request_url) {
     // console.log('start -> ' + request_url);
-    let res = request('GET', request_url);
+    let res = sync_request('GET', request_url);
     let t = JSON.parse(res.getBody('utf8'));;
     // console.log('done  -> ' + request_url);
     return t;
