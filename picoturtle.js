@@ -142,14 +142,13 @@ async function create_turtle(options) {
         if (!options.name) options.name = getNameFromArgs(args);
     }
 
-    console.log('Create turtle options -> ' + JSON.stringify(options));
+    //console.log('Create turtle options -> ' + JSON.stringify(options));
 
     if (typeof t === 'undefined' || t === null) {
         t = new Turtle(options);
         global.t = t;
     }
 
-    console.log(options.name);
     await t.init(options.name);
 }
 

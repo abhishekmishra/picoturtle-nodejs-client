@@ -1,4 +1,4 @@
-const { create_turtle, penup, pendown, penwidth, clear, stop, pencolour, forward, right, left, print } = require('./picoturtle-async');
+const { create_turtle, penup, pendown, penwidth, clear, stop, pencolour, forward, right, left, print } = require('../picoturtle');
 
 let main = async () => {
     await create_turtle();
