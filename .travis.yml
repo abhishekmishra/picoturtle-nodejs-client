@@ -4,7 +4,7 @@ node_js:
 install:
 - npm install
 script:
-- echo "no script"
+- npm run pkg
 notifications:
   email:
   - abhishekmishra3@gmail.com
