@@ -9,10 +9,19 @@ notifications:
   email:
   - abhishekmishra3@gmail.com
 deploy:
-  provider: npm
-  email: abhishekmishra3@gmail.com
-  api_key:
-    secure: zoFHGrUGAlaLgLTFGSd4NT9d7KFiE7nqFHD8E9IROtuvzHjXiTBIAl6spR463DqyykjR4xfTB0QZz52e2OG31onvaNCA8etZO/mDX6JRd3blbKE+Gq/0CCyZS557ZH9J5AkTOCWccCvosCKp0V4hiAYxWHuzAj5RpZck704iNvOhOP0eFvQncSXdPk/2uAE8klSwUAw3E5J5mjs4C8vHyrCgo2yBUcn/LapjiObffjoJYZIj4iNsVJEqpL7Cm6U5tVX0oFA5Ah/Ryn4GXKJWiieKY36DLerd5TqrHbmRyaHUhb34q3aTZZoV9wH09jsd2auUp+9KpPt6uLATvgzOaDy+gSKf+x1LFuInuWi+0vacMzUox187Iz8yDgPOZmxBnKzmaIRZlb6WBdUI0k13U9dPGUnZytKj9jUXTQHaPnzFOoiJcWZT+ZXujC3CyBrv6UIXKlH5g1Xyrg5zNY4Gd7LP0iSFhC9JaF16VW7gGtGO95/txij2n6bD2QQQDttTiA+r9xnP0NBDS+QVgDAjzCEn6DURBrxmH1bMqyL2/vOeTjoQ5H/Dtt8O4F2ht/skY3+4tSlyaU0poLiRyh57THJ5kIPRpXykpmpqMUOek44AB09WcBsC0BHUlYbdKv7us3EG/GSq14pYNRRr12VL5GVqbd7uzGa8X5Ls0BR2RRE=
-  on:
-    tags: true
-    repo: abhishekmishra/picoturtle-nodejs-client
+  - provider: releases
+    api_key:
+      secure: wp6p/D0NkWp7EoEYsSwO7jUT3DjMzY9dRF57LCWOdrpnSMS76eEyvcwNSRCjF7V68DaZkM+gsUNaFIlWcPQF8e+yORmyN/jcNcOFaTMXkw3XYj/gqxfDUbVGZy60KwHCDFRK4sob9HLue3JyXK6tVyyyi8ZtbtWUhVb5GRYbvZP32FTG1FnK3f3jNg8uIu3sN6rZemFdzmdAV+iuq6kjbVVXVGs8Jb6HZ6f1h08UltHPjifrPRQKl56OKeJAWEyQ49LUZz44AsdRXJKL7zm6VJ7MXlsrvTzKfBuHWFKnPsUkNTwV0O0rDWxIMGNsDTTvLWuDL2WMHPGBECgxuEpse6en4SQjO5svFJAXz0uPrAkQXD0ErRf4/RDYpsfGNLopQ9Q2OnzwsDUaQdG7fvJaM3Ir2KL1dSXTyPjJXwtx2HepsvaE8IR47+aa8eOdTMahYBaqgRkoREZ/XwOk4n1v6N0YIvIsXmT1IoRKyfAt2TgQKo2pYUBtZu0vPhrAWYAV7truIg9Al9UxkpvTfW9QGSA0Ao6qGM7pl6HQtKoBjIxHgDrQVNPbWnQK+zovZSp+qoGzAAP/TNzQ0wXXJwfBZ0KD9Ku1qHIqrXE5I8wBvAfJ92o3SLqpdQ4bVIEBRsef6b+UWBKfgc1NvizSVtgJTNiJZAlroawf1EJcLiOkZXQ=
+    file_glob: true
+    file: "./dist/picoturtle-nodejs-client-*"
+    on:
+      tags: true
+      repo: abhishekmishra/picoturtle-nodejs-client
+    skip_cleanup: true
+  - provider: npm
+    email: abhishekmishra3@gmail.com
+    api_key:
+      secure: zoFHGrUGAlaLgLTFGSd4NT9d7KFiE7nqFHD8E9IROtuvzHjXiTBIAl6spR463DqyykjR4xfTB0QZz52e2OG31onvaNCA8etZO/mDX6JRd3blbKE+Gq/0CCyZS557ZH9J5AkTOCWccCvosCKp0V4hiAYxWHuzAj5RpZck704iNvOhOP0eFvQncSXdPk/2uAE8klSwUAw3E5J5mjs4C8vHyrCgo2yBUcn/LapjiObffjoJYZIj4iNsVJEqpL7Cm6U5tVX0oFA5Ah/Ryn4GXKJWiieKY36DLerd5TqrHbmRyaHUhb34q3aTZZoV9wH09jsd2auUp+9KpPt6uLATvgzOaDy+gSKf+x1LFuInuWi+0vacMzUox187Iz8yDgPOZmxBnKzmaIRZlb6WBdUI0k13U9dPGUnZytKj9jUXTQHaPnzFOoiJcWZT+ZXujC3CyBrv6UIXKlH5g1Xyrg5zNY4Gd7LP0iSFhC9JaF16VW7gGtGO95/txij2n6bD2QQQDttTiA+r9xnP0NBDS+QVgDAjzCEn6DURBrxmH1bMqyL2/vOeTjoQ5H/Dtt8O4F2ht/skY3+4tSlyaU0poLiRyh57THJ5kIPRpXykpmpqMUOek44AB09WcBsC0BHUlYbdKv7us3EG/GSq14pYNRRr12VL5GVqbd7uzGa8X5Ls0BR2RRE=
+    on:
+      tags: true
+      repo: abhishekmishra/picoturtle-nodejs-client
