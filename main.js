@@ -45,7 +45,7 @@ if(args.port) {
     pargs.push('-p');
     pargs.push(args.port);
 }
-console.log(pargs);
+
 let p = spawn(process.execPath, pargs);
 p.stdout.on('data', (data) => {
     console.log(`stdout -> ${data}`);
@@ -54,5 +54,5 @@ p.stderr.on('data', (data) => {
     console.log(`stderr -> ${data}`);
 });
 p.on('close', (code) => {
-    console.log('process exited with code - ' + code);
+    //console.log('process exited with code - ' + code);
 });
