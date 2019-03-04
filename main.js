@@ -48,10 +48,10 @@ if(args.port) {
 
 let p = spawn(process.execPath, pargs);
 p.stdout.on('data', (data) => {
-    console.log(`stdout -> ${data}`);
+    console.log(`${data}`);
 });
 p.stderr.on('data', (data) => {
-    console.log(`stderr -> ${data}`);
+    console.log(`${data}`);
 });
 p.on('close', (code) => {
     //console.log('process exited with code - ' + code);
