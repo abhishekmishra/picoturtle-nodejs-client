@@ -138,6 +138,14 @@ class Turtle {
         return t;
     }
 
+    async back(d) {
+        let t = await this.turtle_request('back', [
+            { k: 'd', v: d }
+        ]);
+        // console.log('back ' + d + ' for - ' + t.name);
+        return t;
+    }
+
     async left(a) {
         let t = await this.turtle_request('left', [
             { k: 'a', v: a }
@@ -151,6 +159,30 @@ class Turtle {
             { k: 'a', v: a }
         ]);
         // console.log('right ' + a + ' for - ' + t.name);
+        return t;
+    }
+
+    async font(f) {
+        let t = await this.turtle_request('font', [
+            { k: 'f', v: f }
+        ]);
+        // console.log('font ' + f + ' for - ' + t.name);
+        return t;
+    }
+
+    async filltext(text) {
+        let t = await this.turtle_request('filltext', [
+            { k: 't', v: text }
+        ]);
+        // console.log('filltext ' + t + ' for - ' + t.name);
+        return t;
+    }
+
+    async stroketext(text) {
+        let t = await this.turtle_request('stroketext', [
+            { k: 't', v: text }
+        ]);
+        // console.log('stroketext ' + text + ' for - ' + t.name);
         return t;
     }
 
@@ -253,6 +285,10 @@ async function forward(d) {
     await t.forward(d);
 }
 
+async function back(d) {
+    await t.back(d);
+}
+
 async function right(a) {
     await t.right(a);
 }
@@ -263,6 +299,18 @@ async function left(a) {
 
 async function pencolour(r, g, b) {
     await t.pencolour(r, g, b);
+}
+
+async function font(f) {
+    await t.font(f);
+}
+
+async function filltext(t) {
+    await t.filltext(t);
+}
+
+async function stroketext(t) {
+    await t.stroketext(t);
 }
 
 async function print(text) {
@@ -276,7 +324,6 @@ async function print(text) {
 }
 
 module.exports.Turtle = Turtle;
-// module.exports.t = t;
 module.exports.create_turtle = create_turtle;
 module.exports.pendown = pendown;
 module.exports.penup = penup;
@@ -284,7 +331,11 @@ module.exports.clear = clear;
 module.exports.stop = stop;
 module.exports.penwidth = penwidth;
 module.exports.forward = forward;
+module.exports.back = back;
 module.exports.right = right;
 module.exports.left = left;
 module.exports.pencolour = pencolour;
 module.exports.print = print;
+module.exports.font = font;
+module.exports.filltext = filltext;
+module.exports.stroketext = stroketext;
