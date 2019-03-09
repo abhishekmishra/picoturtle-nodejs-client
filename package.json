@@ -6,7 +6,6 @@
   "bin": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "require-self",
     "pkg": "pkg . -t node10-linux-x64,node10-win-x64,node10-macos-x64 --out-path ./dist",
     "pkg-local": "pkg . -t node10 --out-path ./dist"
   },
