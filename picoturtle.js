@@ -15,16 +15,80 @@ class Turtle {
         if (!options.name) options.name = null;
         if (!options.host) options.host = "127.0.0.1";
         if (!options.port) options.port = "3000";
+        if (!('bulk' in options)) options.bulk = true;
+        if (!('bulk_limit' in options)) options.bulk_limit = 100;
 
+        this.options = options;
         this.name = options.name;
         this.turtle_url = "http://" + options.host + ":" + options.port;
-        this.turtle_request = turtle_request;
+        // this.turtle_request = turtle_request;
+    }
+
+    async turtle_request(cmd, args = null, is_obj = false) {
+        if ((this.options.bulk & cmd != 'create')) {
+            let cargs = [];
+            if (args !== null) {
+                if (is_obj !== null & is_obj) {
+                    let arg_obj = {};
+                    for (var i = 0; i < args.length; i++) {
+                        arg_obj[args[i].k] = args[i].v;
+                    }
+                    cargs.push(arg_obj);
+                } else {
+                    for (var i = 0; i < args.length; i++) {
+                        cargs.push(args[i].v);
+                    }
+                }
+            }
+            let command = {
+                cmd: cmd,
+                args: cargs
+            }
+            // console.log(command);
+            this.commands.push(command);
+            if (this.commands.length >= this.options.bulk_limit | cmd == 'stop') {
+                //drain the commands
+                let res = await axios.post(this.turtle_url + '/turtle/' + this.name + '/commands', this.commands);
+                // console.log('Draining ' + this.commands.length + ' commands for ' + this.name);
+                this.commands = [];
+                let t = await res.data;
+                return t;
+            }
+        } else {
+            // console.log('start -> ' + request_url);
+            let request_url = '/turtle/';
+            if (this.name != null) {
+                request_url += this.name;
+                request_url += '/';
+            }
+            request_url += cmd;
+            if (args != null) {
+                request_url += '?';
+                for (var i = 0; i < args.length; i++) {
+                    if (i > 0) {
+                        request_url += '&';
+                    }
+                    request_url += args[i].k;
+                    request_url += '=';
+                    request_url += args[i].v;
+                }
+            }
+            let res = await axios.get(this.turtle_url + request_url);
+            let t = await res.data;
+            // console.log('done  -> ' + request_url);
+            return t;
+        }
     }
 
     async init(name) {
+        this.commands = [];
+
         if (this.name == null) {
             if (name == null) {
-                let t = await this.turtle_request(this.turtle_url + '/turtle/create?x=250&y=250');
+                let t = await this.turtle_request('create', [
+                    { k: 'x', v: 250 },
+                    { k: 'y', v: 250 }
+                ]);
                 this.name = t.name;
                 // console.log('Created turtle with name ' + t.name);
                 return t;
@@ -35,55 +99,68 @@ class Turtle {
     }
 
     async penup() {
-        let t = await this.turtle_request(this.turtle_url + '/turtle/' + this.name + '/penup');
+        let t = await this.turtle_request('penup');
         // console.log('penup for - ' + t.name);
         return t;
     }
 
     async pendown() {
-        let t = await this.turtle_request(this.turtle_url + '/turtle/' + this.name + '/pendown');
+        let t = await this.turtle_request('pendown');
         // console.log('pendown for - ' + t.name);
         return t;
     }
 
     async penwidth(w) {
-        let t = await this.turtle_request(this.turtle_url + '/turtle/' + this.name + '/penwidth?w=' + w);
+        let t = await this.turtle_request('penwidth', [
+            { k: 'w', v: w }
+        ]);
         // console.log('penwidth ' + w + ' for - ' + t.name);
         return t;
     }
 
     async stop() {
-        let t = await this.turtle_request(this.turtle_url + '/turtle/' + this.name + '/stop');
+        let t = await this.turtle_request('stop');
         // console.log('stop for - ' + t.name);
         return t;
     }
 
     async clear() {
-        let t = await this.turtle_request(this.turtle_url + '/turtle/' + this.name + '/clear');
+        let t = await this.turtle_request('clear');
         // console.log('clear for - ' + t.name);
         return t;
     }
 
     async forward(d) {
-        let t = await this.turtle_request(this.turtle_url + '/turtle/' + this.name + '/forward?d=' + d);
+        let t = await this.turtle_request('forward', [
+            { k: 'd', v: d }
+        ]);
         // console.log('forward ' + d + ' for - ' + t.name);
         return t;
     }
 
     async left(a) {
-        let t = await this.turtle_request(this.turtle_url + '/turtle/' + this.name + '/left?a=' + a);
+        let t = await this.turtle_request('left', [
+            { k: 'a', v: a }
+        ]);
         // console.log('left ' + a + ' for - ' + t.name);
         return t;
     }
 
     async right(a) {
-        let t = await this.turtle_request(this.turtle_url + '/turtle/' + this.name + '/right?a=' + a);
+        let t = await this.turtle_request('right', [
+            { k: 'a', v: a }
+        ]);
         // console.log('right ' + a + ' for - ' + t.name);
         return t;
     }
 
     async pencolour(r, g, b) {
-        let t = await this.turtle_request(this.turtle_url + '/turtle/' + this.name + '/pencolour?r=' + r + '&g=' + g + '&b=' + b);
+        let t = await this.turtle_request('pencolour', [
+            { k: 'r', v: r },
+            { k: 'g', v: g },
+            { k: 'b', v: b }
+        ], true);
+
         // console.log('colour [' + r + ', ' + g + ', ' + b + '] for - ' + t.name);
         return t;
     }
