@@ -1,6 +1,6 @@
 {
   "name": "@picoturtle/picoturtle-nodejs-client",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Nodejs client for picoturtle-server",
   "main": "picoturtle.js",
   "bin": "main.js",
