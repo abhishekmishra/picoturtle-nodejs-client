@@ -146,6 +146,37 @@ class Turtle {
         return t;
     }
 
+    async setpos(x, y) {
+        let t = await this.turtle_request('goto', [
+            { k: 'x', v: x },
+            { k: 'y', v: y }
+        ]);
+        // console.log('goto ' + x + ', ' + y + ' for - ' + t.name);
+        return t;
+    }
+
+    async setx(x) {
+        let t = await this.turtle_request('setx', [
+            { k: 'x', v: x }
+        ]);
+        // console.log('setx ' + x + ' for - ' + t.name);
+        return t;
+    }
+
+    async sety(y) {
+        let t = await this.turtle_request('sety', [
+            { k: 'y', v: y }
+        ]);
+        // console.log('setx ' + x + ' for - ' + t.name);
+        return t;
+    }
+
+    async home() {
+        let t = await this.turtle_request('home');
+        // console.log('home for - ' + t.name);
+        return t;
+    }   
+
     async left(a) {
         let t = await this.turtle_request('left', [
             { k: 'a', v: a }
@@ -159,6 +190,14 @@ class Turtle {
             { k: 'a', v: a }
         ]);
         // console.log('right ' + a + ' for - ' + t.name);
+        return t;
+    }
+
+    async heading(a) {
+        let t = await this.turtle_request('heading', [
+            { k: 'a', v: a }
+        ]);
+        // console.log('heading ' + a + ' for - ' + t.name);
         return t;
     }
 
@@ -194,6 +233,12 @@ class Turtle {
         ], true);
 
         // console.log('colour [' + r + ', ' + g + ', ' + b + '] for - ' + t.name);
+        return t;
+    }
+
+    async state() {
+        let t = await this.turtle_request('state');
+        // console.log('state for - ' + t.name);
         return t;
     }
 }
@@ -262,55 +307,79 @@ async function create_turtle(options) {
 }
 
 async function pendown() {
-    await t.pendown();
+    return await t.pendown();
 }
 
 async function penup() {
-    await t.penup();
+    return await t.penup();
 }
 
 async function clear() {
-    await t.clear();
+    return await t.clear();
 }
 
 async function stop() {
-    await t.stop();
+    return await t.stop();
 }
 
 async function penwidth(w) {
-    await t.penwidth(w);
+    return await t.penwidth(w);
 }
 
 async function forward(d) {
-    await t.forward(d);
+    return await t.forward(d);
 }
 
 async function back(d) {
-    await t.back(d);
+    return await t.back(d);
+}
+
+async function setpos(x, y) {
+    return await t.setpos(x, y);
+}
+
+async function setx(x) {
+    return await t.setx(x);
+}
+
+async function sety(y) {
+    return await t.sety(y);
+}
+
+async function home() {
+    return await t.home();
 }
 
 async function right(a) {
-    await t.right(a);
+    return await t.right(a);
 }
 
 async function left(a) {
-    await t.left(a);
+    return await t.left(a);
+}
+
+async function heading(a) {
+    return await t.heading(a);
 }
 
 async function pencolour(r, g, b) {
-    await t.pencolour(r, g, b);
+    return await t.pencolour(r, g, b);
 }
 
 async function font(f) {
-    await t.font(f);
+    return await t.font(f);
 }
 
 async function filltext(text) {
-    await t.filltext(text);
+    return await t.filltext(text);
 }
 
 async function stroketext(text) {
-    await t.stroketext(text);
+    return await t.stroketext(text);
+}
+
+async function state() {
+    return await t.state();
 }
 
 async function print(text) {
@@ -332,10 +401,16 @@ module.exports.stop = stop;
 module.exports.penwidth = penwidth;
 module.exports.forward = forward;
 module.exports.back = back;
+module.exports.setpos = setpos;
+module.exports.setx = setx;
+module.exports.sety = sety;
+module.exports.home = home;
 module.exports.right = right;
 module.exports.left = left;
+module.exports.heading = heading;
 module.exports.pencolour = pencolour;
 module.exports.print = print;
 module.exports.font = font;
 module.exports.filltext = filltext;
 module.exports.stroketext = stroketext;
+module.exports.state = state;
