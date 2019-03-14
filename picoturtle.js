@@ -46,13 +46,15 @@ class Turtle {
             }
             // console.log(command);
             this.commands.push(command);
-            if (this.commands.length >= this.options.bulk_limit | cmd == 'stop') {
+            if (this.commands.length >= this.options.bulk_limit | cmd == 'stop' | cmd == 'state') {
                 //drain the commands
                 let res = await axios.post(this.turtle_url + '/turtle/' + this.name + '/commands', this.commands);
                 // console.log('Draining ' + this.commands.length + ' commands for ' + this.name);
                 this.commands = [];
                 let t = await res.data;
                 return t;
+            } else {
+                return Promise.resolve("turtle is async, so no state at the moment.");
             }
         } else {
             // console.log('start -> ' + request_url);
@@ -175,7 +177,7 @@ class Turtle {
         let t = await this.turtle_request('home');
         // console.log('home for - ' + t.name);
         return t;
-    }   
+    }
 
     async left(a) {
         let t = await this.turtle_request('left', [
@@ -273,7 +275,7 @@ function parseArgs() {
 
 function getPortFromArgs(args) {
     let port = "3000";
-    if(args.port) {
+    if (args.port) {
         port = args.port;
     }
     return port;
@@ -281,7 +283,7 @@ function getPortFromArgs(args) {
 
 function getNameFromArgs(args) {
     let name = null;
-    if(args.name) {
+    if (args.name) {
         name = args.name;
     }
     return name;
