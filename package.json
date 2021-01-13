@@ -26,8 +26,8 @@
   "homepage": "https://github.com/abhishekmishra/picoturtle-nodejs-client#readme",
   "dependencies": {
     "argparse": "^1.0.10",
-    "axios": "^0.18.1",
-    "pkg": "^4.3.7",
+    "axios": "^0.21.1",
+    "pkg": "^4.4.9",
     "sync-request": "^6.0.0"
   },
   "publishConfig": {
